@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>보안규정 평가 문제지</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f2f5f3;--paper:#fff;--ink:#17251f;--sub:#68776f;--line:#dce5df;
+  --accent:#245744;--accent2:#39765b;--on-accent:#fff;--sel:#e8f3ec;
+  --ok:#167348;--okbg:#e5f5eb;--bad:#b42332;--badbg:#fff0f0;
+  --shadow:0 10px 30px rgba(22,48,35,.07);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(ellipse at top left,#e2eee5 0,transparent 38%),var(--bg);color:var(--ink);
+font-family:"Pretendard","Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;font-size:16px;line-height:1.7;word-break:keep-all;overflow-wrap:anywhere}
+button,input{font:inherit;color:inherit}button{cursor:pointer;transition:transform .16s,box-shadow .16s,background .16s,border-color .16s}
+button:active{transform:scale(.99)}
+:focus-visible{outline:3px solid #80b99a;outline-offset:3px}
+.wrap{max-width:820px;margin:0 auto;padding:24px 18px 124px}
+.home-title{font-size:clamp(29px,5vw,42px);font-weight:900;letter-spacing:-.045em;line-height:1.18;margin:36px 0 10px;padding:0;border:0;display:block}
+.home-title:before{content:"SECURITY · TRAINING";display:block;font-size:11px;letter-spacing:.18em;color:var(--accent2);font-weight:900;margin-bottom:13px}
+.home-title:after{content:"";display:block;width:62px;height:5px;border-radius:5px;background:linear-gradient(90deg,var(--accent),#a6c8ad);margin-top:18px}
+.home-sub{color:var(--sub);margin:0 0 28px;font-size:15px}
+.set-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.set-btn{position:relative;overflow:hidden;background:linear-gradient(145deg,#fff,#f9fcfa);border:1px solid var(--line);border-radius:18px;padding:23px 21px 20px;text-align:left;display:flex;flex-direction:column;gap:8px;box-shadow:var(--shadow);min-height:174px}
+.set-btn:after{content:"";position:absolute;width:100px;height:100px;border-radius:50%;right:-28px;top:-30px;background:rgba(55,117,87,.07)}
+.set-btn:hover{border-color:#83ad91;background:var(--sel);box-shadow:0 14px 34px rgba(22,48,35,.12);transform:translateY(-2px)}
+.set-btn .num{font-size:clamp(38px,6vw,50px);font-weight:900;line-height:1.05;letter-spacing:-.06em;color:var(--accent)}
+.set-btn .meta{font-size:13px;color:var(--sub);line-height:1.65;white-space:pre-line}
+.set-btn .meta:before{content:"25문항 구성";display:block;color:var(--accent2);font-weight:800;font-size:11px;letter-spacing:.03em;margin-bottom:4px}
+.topbar{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);box-shadow:0 4px 18px rgba(22,48,35,.04)}
+.topbar-in{max-width:820px;margin:0 auto;padding:11px 18px;display:flex;align-items:center;gap:12px}
+.back{background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-size:13px;font-weight:750;white-space:nowrap}
+.back:hover{border-color:var(--accent);background:var(--sel)}
+.top-title{font-weight:900;font-size:17px;letter-spacing:-.02em}
+.top-prog{margin-left:auto;font-size:13px;color:var(--sub);font-weight:800;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{height:5px;background:#e7eee9}
+.bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#245744,#8fbd9b);transition:width .2s;border-radius:0 5px 5px 0}
+.sec-head{margin:30px 0 14px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border:0;padding:0}
+.sec-head h2{margin:0;font-size:22px;font-weight:900;letter-spacing:-.035em}
+.sec-head span{color:var(--sub);font-size:13px;background:#e7eee9;padding:4px 9px;border-radius:999px;font-weight:700}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:18px 17px;margin-bottom:13px;display:grid;grid-template-columns:2em minmax(0,1fr);column-gap:8px;box-shadow:0 5px 18px rgba(22,48,35,.035)}
+.qno{font-weight:900;font-size:15px;color:var(--accent);background:var(--sel);border-radius:9px;width:29px;height:29px;display:grid;place-items:center}
+.qtext{white-space:pre-line;line-height:1.85}
+.qbox{border:1px solid var(--line);border-radius:12px;padding:12px;margin:12px 0 0;white-space:pre-line;font-size:15px;background:#f8fbf9}
+.blank{display:inline-block;width:9.5em;max-width:100%;margin:3px;padding:5px 9px;border:1px solid #c8dbce;border-bottom:2px solid var(--accent2);background:#f1f8f3;border-radius:8px;font-size:15px;transition:background .15s,border-color .15s}
+.blank::placeholder{color:#8a9a90;opacity:1}.blank:focus{outline:none;background:#fff;border-color:var(--accent);box-shadow:0 0 0 3px rgba(57,118,91,.12)}
+.opts{grid-column:2;margin-top:12px;display:grid;gap:8px}
+.opt{width:100%;text-align:left;background:#fff;border:1px solid var(--line);border-radius:12px;padding:11px 13px;display:grid;grid-template-columns:1.7em 1fr;gap:7px;align-items:start;line-height:1.65}
+.opt>span:first-child{display:grid;place-items:center;width:25px;height:25px;background:#f0f4f1;border-radius:8px;color:var(--sub);font-size:13px;font-weight:900}
+.opt:hover{border-color:#8eb49a;background:#fbfefc}
+.opt[aria-pressed="true"]{background:var(--sel);border-color:var(--accent2);box-shadow:0 0 0 1px var(--accent2) inset;font-weight:700}
+.opt[aria-pressed="true"]>span:first-child{background:var(--accent);color:#fff}
+.tf{grid-column:2;margin-top:12px;display:flex;gap:10px}
+.tf button{flex:1;padding:11px 0;font-size:21px;font-weight:900;background:#fff;border:1px solid var(--line);border-radius:12px}
+.tf button:hover{border-color:var(--accent2);background:#f6fbf7}
+.tf button[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent);box-shadow:0 5px 12px rgba(36,87,68,.18)}
+table.mini{border-collapse:separate;border-spacing:0;overflow:hidden;border-radius:10px;margin-top:12px;width:100%;font-size:14px;text-align:center}
+table.mini th,table.mini td{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:8px 6px}
+table.mini th{background:#eaf2ec;color:var(--accent);font-weight:850}
+table.mini tr:first-child th{border-top:1px solid var(--line)}table.mini td:first-child,table.mini th:first-child{border-left:1px solid var(--line)}
+.submit-bar{position:fixed;left:0;right:0;bottom:0;z-index:10;background:rgba(255,255,255,.93);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:12px 18px calc(12px + env(safe-area-inset-bottom))}
+.submit-bar>div{max-width:784px;margin:0 auto}
+.primary{width:100%;padding:14px 18px;font-size:16px;font-weight:900;letter-spacing:-.01em;background:linear-gradient(135deg,#245744,#39765b);color:#fff;border:0;border-radius:13px;box-shadow:0 7px 18px rgba(36,87,68,.2)}
+.primary:hover{filter:brightness(1.06);box-shadow:0 9px 22px rgba(36,87,68,.25)}
+.ghost{padding:12px 14px;font-weight:800;background:#fff;border:1px solid #b8cfc0;color:var(--accent);border-radius:12px}
+.ghost:hover{background:var(--sel)}
+.score-box{background:linear-gradient(145deg,#fff,#f7fbf8);border:1px solid var(--line);border-radius:22px;padding:26px 22px;margin-top:18px;box-shadow:var(--shadow)}
+.score-main{display:flex;align-items:baseline;gap:8px;margin:12px 0}
+.score-main b{font-size:clamp(56px,12vw,76px);font-weight:950;line-height:1;letter-spacing:-.06em;color:var(--accent);font-variant-numeric:tabular-nums}
+.score-main span{font-size:18px;color:var(--sub);font-weight:800}
+.score-line{margin-top:6px;color:var(--sub);font-weight:650}
+.score-parts{margin-top:22px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.score-parts div{border:1px solid var(--line);background:#fff;border-radius:13px;padding:11px;font-size:12px;color:var(--sub)}
+.score-parts b{display:block;color:var(--ink);font-size:17px;font-variant-numeric:tabular-nums;margin-top:3px}
+.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.actions .primary{width:auto;flex:1 1 200px}.actions .ghost{flex:1 1 120px}
+.tabs{display:flex;gap:8px;margin:26px 0 13px}
+.tab{padding:9px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:13px;font-weight:800;color:var(--sub)}
+.tab[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.rv{border-left:5px solid var(--line);display:block;padding:16px 17px}
+.rv.ok{border-left-color:var(--ok)}.rv.no{border-left-color:var(--bad)}
+.rv-head{display:flex;align-items:center;gap:9px;margin-bottom:10px;font-weight:900}
+.badge{font-size:12px;padding:3px 10px;border-radius:999px;font-weight:900}
+.badge.ok{background:var(--okbg);color:var(--ok)}.badge.no{background:var(--badbg);color:var(--bad)}
+.rv-q{white-space:pre-line;margin-bottom:12px;line-height:1.8}
+.ans-grid{display:grid;gap:7px}
+.ans-row{display:grid;grid-template-columns:4.6em 1fr;gap:8px;padding:9px 11px;border-radius:9px;background:#f6f8f6}
+.ans-row.mine{background:var(--badbg)}.ans-row.mine.right,.ans-row.right-answer{background:var(--okbg)}
+.ans-row .lab{font-weight:900;font-size:13px}.ans-row.mine .lab{color:var(--bad)}
+.ans-row.mine.right .lab,.ans-row.right-answer .lab{color:var(--ok)}
+.blank-tag{font-weight:900;color:var(--sub);margin-right:4px}
+.empty{padding:32px 18px;text-align:center;color:var(--sub);background:#fff;border:1px dashed #bdcec2;border-radius:16px}
+@media(max-width:520px){
+ .wrap{padding:18px 13px 116px}.home-title{margin-top:25px}.set-grid{gap:10px}.set-btn{padding:18px 15px;min-height:155px;border-radius:15px}.set-btn .num{font-size:38px}
+ .topbar-in{padding:10px 12px;gap:8px}.top-title{font-size:15px}.back{padding:7px 9px}
+ .card{padding:15px 12px;grid-template-columns:27px minmax(0,1fr);column-gap:7px;border-radius:13px}
+ .qtext{font-size:15px}.blank{width:8.5em;font-size:14px}.score-box{padding:22px 16px}.score-parts{gap:6px}.score-parts div{padding:9px 7px}
+ .ans-row{grid-template-columns:4.2em 1fr}.submit-bar{padding-left:12px;padding-right:12px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto}}
+
+/* ===== FIELD COMMAND / MILITARY UI THEME ===== */
+:root{
+ --bg:#171d17;--paper:#222a20;--ink:#edf0df;--sub:#a8b29a;--line:#414b38;
+ --accent:#b7c77b;--accent2:#d0d9a0;--on-accent:#182016;--sel:#303b29;
+ --ok:#a8d18d;--okbg:#263a25;--bad:#ff9d88;--badbg:#422a24;
+ --shadow:0 12px 30px rgba(0,0,0,.25);
+}
+html{background:#171d17}
+body{background:linear-gradient(180deg,rgba(117,139,72,.13),transparent 300px),repeating-linear-gradient(135deg,rgba(255,255,255,.012) 0 2px,transparent 2px 7px),var(--bg);color:var(--ink)}
+.wrap{max-width:900px}
+.home-title{font-family:'Malgun Gothic',sans-serif;text-transform:none;letter-spacing:-.055em;color:#f0f2df}
+.home-title:before{content:'ROK ARMY  /  SECURITY TRAINING';color:#c1d18a;letter-spacing:.2em;border-left:4px solid #a5b86a;padding-left:10px}
+.home-title:after{width:100%;height:2px;border-radius:0;background:linear-gradient(90deg,#a5b86a,transparent);margin-top:22px}
+.home-sub{color:#b8c1aa}
+.set-grid{gap:12px}
+.set-btn{background:linear-gradient(145deg,#293226,#20271f);border:1px solid #4a5740;border-left:4px solid #879b55;border-radius:5px;box-shadow:0 7px 18px #090c09a8;min-height:160px}
+.set-btn:after{content:'FIELD TRAINING';width:auto;height:auto;border-radius:0;right:12px;top:auto;bottom:10px;background:none;color:#657454;font-size:9px;font-weight:900;letter-spacing:.18em}
+.set-btn:hover{background:#303b29;border-color:#b7c77b;transform:translateY(-2px)}
+.set-btn .num{color:#d0d99a;text-shadow:0 2px 12px #a3b86b25}
+.set-btn .meta{color:#c0c9b6}
+.set-btn .meta:before{color:#b7c77b}
+.topbar{background:rgba(24,31,23,.96);border-bottom:1px solid #526044;box-shadow:0 5px 18px #0006}
+.topbar-in{max-width:900px}
+.back{background:#30392b;color:#e8edd9;border:1px solid #58664a;border-radius:4px}
+.back:hover{background:#414d35;border-color:#b7c77b}
+.top-title{color:#e9eedb;letter-spacing:.02em}
+.top-prog{color:#c4cfad}
+.bar{height:6px;background:#30392b}
+.bar>i{background:repeating-linear-gradient(90deg,#a9bd70 0 12px,#c6d78c 12px 15px);box-shadow:0 0 12px #b8ca7950}
+.card{background:linear-gradient(145deg,#262e24,#20271f);border:1px solid #414c38;border-radius:5px;box-shadow:0 8px 22px #0003}
+.qno{background:#a9bd70;color:#1c2418;border-radius:3px;font-weight:900}
+.qtext{color:#eef0e2}
+input,.blank{background:#151b14!important;color:#f3f5e8!important;border:1px solid #667454!important;border-radius:3px!important}
+input:focus,.blank:focus{border-color:#c2d58a!important;box-shadow:0 0 0 3px #a7bb7028}
+.opt{background:#20271f;border:1px solid #46513d;border-radius:4px;color:#e7ebdc}
+.opt:hover{background:#303a2a;border-color:#8fa35c}
+.opt[aria-pressed="true"]{background:#39472d;border-color:#c0d486;box-shadow:inset 4px 0 #b9cc7b}
+.tf button{background:#252d22;color:#e7ebdc;border:1px solid #4c5941;border-radius:4px}
+.tf button[aria-pressed="true"]{background:#b7c77b;color:#1a2116;border-color:#d2dfa0}
+button{transition:background .15s,border-color .15s,transform .15s}
+button:focus-visible{outline:3px solid #d3e59a;outline-offset:3px}
+.submit-bar,.bottom-bar{background:rgba(24,31,23,.96);border-top:1px solid #4b5840;backdrop-filter:blur(12px)}
+button.primary,.submit,.grade-btn{background:#b7c77b!important;color:#1b2316!important;border:1px solid #d3dfa0!important;border-radius:4px!important;font-weight:900}
+button.primary:hover,.submit:hover,.grade-btn:hover{background:#d0dc98!important}
+.score-card,.score-box{background:#283225;border:1px solid #596747;border-radius:5px}
+.score-main b{color:#d0dc98}
+.rv{background:#242c21;border:1px solid #45513a;border-radius:4px}
+.rv.ok{border-left:4px solid #a8d18d}.rv.no{border-left:4px solid #ff9d88}
+.badge{border-radius:3px}
+.badge.ok{background:#2c4428;color:#c3e3a8}.badge.no{background:#4a2b24;color:#ffb3a2}
+.ans-row{border-radius:3px}.ans-row.mine{background:#422a24}.ans-row.mine.right,.ans-row.right-answer{background:#263a25}
+.ans-row.mine .lab{color:#ffad99}.ans-row.mine.right .lab,.ans-row.right-answer .lab{color:#bce39e}
+.mini{border-collapse:collapse;background:#20271f;color:#e8ecd9}.mini th{background:#39452d;color:#d4e29b}.mini th,.mini td{border:1px solid #56634a;padding:8px}
+.empty{background:#20271f;border:1px dashed #5b694c;border-radius:4px;color:#bdc8ae}
+@media(max-width:520px){.wrap{padding:16px 12px 120px}.set-btn{padding:18px 14px;min-height:150px}.home-title{margin-top:25px}.topbar-in{padding:10px 12px}.top-title{font-size:15px}}
+
+
+/* ===== BRIGHT FIELD COMMAND VARIANT ===== */
+:root{--bg:#dfe6d5;--paper:#f8faef;--ink:#20291d;--sub:#626e55;--line:#c2ccb3;--accent:#526b35;--accent2:#71894b;--on-accent:#fff;--sel:#e8efd9;--ok:#356d37;--okbg:#e5f1dc;--bad:#a33c2c;--badbg:#fae8e1;--shadow:0 8px 22px rgba(47,63,33,.10)}
+html{background:#dfe6d5}
+body{background:linear-gradient(180deg,rgba(255,255,255,.62),transparent 340px),repeating-linear-gradient(135deg,rgba(79,99,51,.025) 0 2px,transparent 2px 7px),var(--bg);color:var(--ink)}
+.home-title{color:#26331e}.home-title:before{color:#526b35;border-left-color:#71894b}.home-title:after{background:linear-gradient(90deg,#71894b,#c6d3a9,transparent)}
+.home-sub{color:#626e55}
+.set-btn{background:linear-gradient(145deg,#fbfcf5,#edf2e4);border-color:#b8c6a5;border-left-color:#71894b;box-shadow:0 7px 18px rgba(47,63,33,.10)}
+.set-btn:after{color:#879875}.set-btn:hover{background:#e8efd9;border-color:#71894b}.set-btn .num{color:#526b35;text-shadow:none}.set-btn .meta{color:#626e55}.set-btn .meta:before{color:#526b35}
+.topbar{background:rgba(245,248,237,.96);border-bottom-color:#bdc9ad;box-shadow:0 5px 18px rgba(47,63,33,.08)}
+.back{background:#edf2e4;color:#344329;border-color:#b8c6a5}.back:hover{background:#e0e9d0;border-color:#71894b}
+.top-title{color:#26331e}.top-prog{color:#526342}.bar{background:#cbd5bd}.bar>i{background:repeating-linear-gradient(90deg,#71894b 0 12px,#a4ba7a 12px 15px);box-shadow:0 0 8px #71894b30}
+.sec-head span{background:#e4ebd8;color:#526342}
+.card{background:linear-gradient(145deg,#fbfcf6,#f0f4e8);border-color:#c4cfb7;box-shadow:0 5px 16px rgba(47,63,33,.06)}.qno{background:#d6e2bf;color:#344329}.qtext{color:#20291d}
+input,.blank{background:#fffef8!important;color:#20291d!important;border-color:#aebd98!important}input:focus,.blank:focus{border-color:#71894b!important;box-shadow:0 0 0 3px #71894b22}
+.opt{background:#f9fbf3;border-color:#c6d0ba;color:#26331e}.opt>span:first-child{background:#e5ebda;color:#526342}.opt:hover{background:#eef3e5;border-color:#8fa675}.opt[aria-pressed="true"]{background:#e4edd5;border-color:#71894b;box-shadow:inset 4px 0 #71894b}.opt[aria-pressed="true"]>span:first-child{background:#526b35;color:#fff}
+.tf button{background:#f9fbf3;color:#26331e;border-color:#c6d0ba}.tf button[aria-pressed="true"]{background:#526b35;color:#fff;border-color:#526b35}
+.submit-bar,.bottom-bar{background:rgba(245,248,237,.97);border-top-color:#bdc9ad}
+button.primary,.submit,.grade-btn{background:#526b35!important;color:#fff!important;border-color:#71894b!important;box-shadow:0 5px 14px rgba(65,86,42,.18)}button.primary:hover,.submit:hover,.grade-btn:hover{background:#657e43!important}
+.score-card,.score-box{background:linear-gradient(145deg,#fbfcf5,#eaf0df);border-color:#bdc9ad}.score-main b{color:#526b35}
+.rv{background:#f8faef;border-color:#c2ccb3}.rv.ok{border-left-color:#4d8747}.rv.no{border-left-color:#b6533c}
+.badge.ok{background:#e1eed8;color:#356d37}.badge.no{background:#fae8e1;color:#a33c2c}
+.ans-row{background:#edf1e7}.ans-row.mine{background:#fae8e1}.ans-row.mine.right,.ans-row.right-answer{background:#e5f1dc}.ans-row.mine .lab{color:#a33c2c}.ans-row.mine.right .lab,.ans-row.right-answer .lab{color:#356d37}
+table.mini,.mini{background:#f8faef;color:#26331e}table.mini th,.mini th{background:#e1e9d3;color:#526b35}table.mini th,table.mini td{border-color:#c2ccb3}
+.empty{background:#f8faef;border-color:#b8c6a5;color:#626e55}
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+/* ================== 문제 데이터 ================== */
+/* short: q 안의 {_} 는 빈칸, a 는 정답(배열 안의 배열은 허용 답안), any:true 는 순서 무관
+   mc: a 는 정답 번호(0부터), tf: a 는 "O" | "X" */
+const SETS = {
+  1: {
+    short: [
+      { q: "각급부대의 장은 시설공사 및 장비 제조 구매·용역사업 등을 비밀사업으로 시행하고자 할 때에는 국군방첩사령관의 {_}를 발급받아야 하며, {_}부터 보안시설 설계도 등을 비밀로 취급해야 한다.", a: ["비밀사업 확인서", "최초 시행단계"] },
+      { q: "암호장비 운용책임관은 암호장비의 보관 및 작동 상태 등 이상 유무를 {_} 이상 점검하고 그 결과를 별지 제4호 서식에 기록, 유지하여야 하며, 관리책임관(정)은 {_} 이상 기록 상태를 확인해야 한다.", a: [["주1회", "매주1회"], ["월1회", "매월1회"]] },
+      { q: "비밀에 대한 복제·복사를 제한하고자 할 때에는 비밀 표지의 식별이 가능토록 {_} 또는 비밀 표지의 뒷면에 경고문구를 {_}으로 표기한다.", a: ["예고문란 위", "적색"] },
+      { q: "비밀을 생산할 경우 원본에는 보호기간과 {_}, 사본에는 보호기간과 처리방법을 명시해야 한다.", a: ["보존기간"] },
+      { q: "개인별 비밀보관 관리시 {_}이 교체될 때에는 업무 인수인계서에 비밀소유 현황, 비밀관계서류 현황 등을 포함한다.", a: ["보관책임관 ‘정’"] },
+      { q: "다음 각 호에 해당하는 자는 보안관계관을 채워 넣으시오.\n① 보관책임관 “정”: 비밀을 보관하고 있는 {_}\n② 보관책임관 “부”: 비밀을 취급 관리하는 {_}", a: ["단위 부서장", "실무자"] },
+      { q: "업무참고용으로 작성한 비밀 바인더(사본)는 접수용 비밀관리기록부에 등재하고 바인더 첫 쪽에는 {_}를 유지하여야 하며, 바인더 내 복제·복사 비밀은 {_}의 보호기간이 만료될 경우 파기한다.", a: ["목록표", "원본비밀"] },
+      { q: "{_}을 사용할 경우 상징명칭·부대표지(마크 등)를 동시에 혼용할 수 있으나, {_} 사용 시는 고유명칭·상징명칭·부대표지(마크 등) 등을 혼용할 수 없으며, 전자문서 체계상 부대 명칭이 혼용 표기되지 않도록 조치하여야 한다.", a: ["고유명칭", "통상명칭"] },
+      { q: "시스템관리자는 사용자 계정의 등록·변경·삭제 등을 {_} 승인하에 수행하고, 사용자계정 및 비밀번호 입력이 {_}회에 걸쳐 일치하지 않을 경우 정보통신시스템 접속을 중지시키고 비인가자 침입 여부를 확인·점검한다.", a: ["부대장", "5"] },
+      { q: "KJCCS 단말기가 설치되는 장소는 {_} 이상으로 설정 운영한다.", a: ["군사제한구역"] }
+    ],
+    mc: [
+      { q: "다음 중 예고문 부여 관련 틀린 것은?", o: ["비밀을 생산할 경우 원본에는 보호기간과 보존기간, 사본에는 보호기간과 처리방법을 명시한다.", "사본의 보호기간은 원본의 보호기간보다 길게 부여할 수 있다.", "기한 예측이 어려울 때에는 생산일로부터 1년 이내로 부여하고, 영구보존이 필요한 때에는 “영구” 등으로 부여할 수 있다.", "보존기간은 1년, 3년, 5년, 10년, 30년, 준영구, 영구의 7종으로 부여하여야 한다."], a: 1 },
+      { q: "비밀의 복제·복사에 관한 설명 중 틀린 것은?", o: ["회의 등 한시적 목적으로 비밀을 복제·복사시에는 해당 비밀문건의 비밀이력카드에 복제·복사 근거를 생략할 수 있다.", "비밀을 복제·복사하여 제3자에게 제공할 경우 각 사본의 사본 번호와 배부처를 작성하여 사본 제작에 사용된 비밀에 첨부한다.", "복사기 및 스캐너에는 통제번호를 부착하여 문건 복제·복사시 통제번호가 출력되도록 해야 한다.", "비밀에 대한 복제·복사를 제한하고자 할 때에는 비밀 표지에 식별 가능토록 적색으로 복제·복사 제한 문구를 표기해야 한다."], a: 0 },
+      { q: "비밀의 예고문에 대한 설명으로 틀린 것은?", o: ["비밀의 보호기간은 보호되어야 할 필요가 있는 기간으로 부여하되, “재발행 시” 등과 같이 불확실하게 기재해서는 안된다.", "사본의 보호기간은 원본의 보호기간보다 길게 부여할 수 없다.", "보존기간이 시작되는 일자는 비밀원본을 생산한 날이 속하는 해의 다음해 1월 1일로 한다.", "보호기간은 보존기간 보다 길게 부여해야 한다."], a: 3 },
+      { q: "비밀의 파기에 대한 설명으로 틀린 것은?", o: ["소각, 용해 또는 세절 등의 방법으로 원형을 완전히 소멸시켜야 한다.", "비밀을 관리하고 있는 실무자가 직접 파기해야 한다.", "비밀을 파기한 후에는 해당 비밀의 비밀이력카드도 함께 파기해야 한다.", "비밀은 사본에 한해 보호기간 만료일 업무 종료시 파기함을 원칙으로 한다."], a: 2 },
+      { q: "비밀생산시 보호대책 관련 옳지 않은 것은?", o: ["비밀생산과 관련이 없는 인원의 접근 통제 등 필요한 보안대책 강구", "부대의 비밀세부분류기준에 따른 비밀분류", "작업 간 자리이탈시 비밀표지 부착, 서랍에 잠금장치 하여 보관", "비밀지정권자가 결재하기 이전의 비밀 기안문서는 평문과 동일하게 취급"], a: 3 }
+    ],
+    tf: [
+      { q: "군사비밀은 그 내용이 누설되는 경우 국가 안전보장 및 국가 이익에 현저한 위험을 초래될 것으로 명백히 인정되는 가치를 지닌 것을 Ⅲ급 비밀로 한다.", a: "X" },
+      { q: "접수한 사본을 재생산하여 배부 시 해당 비밀 원본 생산부대의 승인이 필요하나, 정기적으로 접수한 사본을 재생산·배부하는 경우는 예외로 할 수 있다.", a: "O" },
+      { q: "각급부대(서)장은 보안상 유해하거나 그 밖의 사회적 물의야기 등의 문제점을 해소하기 위하여 비밀을 포함한 군사자료에 대하여 보안성 검토를 실시해야 한다.", a: "X" },
+      { q: "비밀은 합동 보관을 원칙으로 하며, 필요시 분산 보관할 수 있다.", a: "X" },
+      { q: "비밀보관 용기에는 비밀이 보관되어 있다는 것을 나타낼 수 있도록 표시해야 한다.", a: "X" },
+      { q: "사본의 보호기간은 원본의 보호기간보다 길게 부여할 수 없다.", a: "O" },
+      { q: "비밀의 보호기간을 ‘재발행시’로 기재할 수 있다.", a: "X" },
+      { q: "훈련(연습) 비밀은 각종 훈련(연습)간 생산 및 접수된 비밀로서 일반문서와 식별될 수 있도록 적색으로 표시하고, 복제·복사 또는 컴퓨터로 출력하거나 인쇄할 때에는 적색으로 표시해야 한다.", a: "X" },
+      { q: "외국인이 특전훈련, 시범, 견학 등 군사외교 및 홍보 시 업무상 필요한 경우 군사통제구역의 출입을 허가할 수 있다.", a: "O" },
+      { q: "전장관리정보체계 네트워크 혼용 방지를 위해 체계간 LAN 케이블 색상을 아래와 같이 적용하고 주기표를 부착한다.", a: "X", table: true }
+    ]
+  },
+
+  2: {
+    short: [
+      { q: "무선키보드는 무선 구간 암호화 기능이 있는 제품으로 {_}의 승인을 받아 {_}을 취급하는 PC에 한하여 사용한다.", a: ["보안담당관", "일반 평문"] },
+      { q: "드론 등 무인 항공기를 이용하여 항공 촬영 시는 부대 특성에 부합한 보안대책(무선인터넷 기능 물리적 제거, {_}, 비행종료 후 드론 내 영상 제거 등)을 마련하여야 한다.", a: ["저장매체 등록관리"] },
+      { q: "개인소유 상용정보통신장비를 이용하여 군사자료를 {_}, {_}, {_} 또는 {_} 할 수 없다.", a: ["작성", "저장", "촬영", "전송"], any: true },
+      { q: "비밀의 {_}은 1년, 3년, 5년, 10년, 30년, 준영구, 영구의 7종으로 부여하여야 한다.", a: ["보존기간"] },
+      { q: "{_}이란 비밀을 보관하고 있는 시설에서 시설 밖이나 타부대로 가지고 나가는 것을 말한다.", a: ["지출"] },
+      { q: "USB 메모리는 {_}으로만 등록하여 사용하여야 한다. 다만 부득이하게 {_}으로 사용할 필요가 있을 경우에는 {_} 승인을 받아야 한다.", a: ["비밀용", "일반용", "창선급 부대(서)장"] },
+      { q: "개봉된 상태의 비밀을 접수한 때에는 이상 유·무를 확인하고 이상이 있을 때에는 해당 부대 {_} 및 {_}에 통보한다.", a: ["보안담당관", "방첩부대"] },
+      { q: "군사보안시설 및 보호장비는 적에게 파괴 또는 피탈 시 국방에 미치는 영향에 따라 분류하는데, 군의 임무수행에 막대한 차질을 초래할 시설 및 장비는 {_}급으로 분류한다.", a: ["나"] },
+      { q: "주컴퓨터 관련 관리자 {_}(각종 응용체계 및 DBMS)와 네트워크 장비(라우터 등)용 {_}는 비밀 또는 비공개 업무자료로 분류하여 기록, 유지하거나 전산화하여 관리하여야 한다.", a: ["비밀번호", "비밀번호"] },
+      { q: "KJCCS 단말기에는 {_}, {_}, 네트워크접근제어(NAC), 문서보안(DRM) 등을 설치 운용한다.", a: ["워터홀", "T게이트"], any: true }
+    ],
+    mc: [
+      { q: "비밀회의시 보안대책으로 틀린 것은?", o: ["여러 개의 안건으로 비밀회의를 개최 시는 안건 내용에 따라 업무와 관계있는 사람만 참석시켜야 한다.", "군사보호구역으로 설정되지 않은 장소는 임시 보호구역(통제구역)으로 설정하여 이에 따른 보안대책을 강구하여야 한다.", "회의 성격에 따라 부득이 비인가자의 참여가 필요할 때는 미리 서약서를 집행한 후 참석시켜야 한다.", "비밀을 발표할 때에는 유·무선 마이크를 사용하여야 한다."], a: 3 },
+      { q: "비밀의 보관 기준에 대한 설명으로 틀린 것은?", o: ["비밀 보관용기에는 비밀이 보관되어 있다는 것을 표시해야 한다.", "비밀은 분산 보관을 원칙으로 하며, 필요시 합동 보관할 수 있다.", "Ⅰ급 비밀은 타 등급의 비밀과 분리하여 보관해야 한다.", "비밀을 휴대하고 국외로 출장하는 자는 주재 공관에 위탁, 보관하여야 한다."], a: 0 },
+      { q: "비밀 보관용기에 대한 설명으로 틀린 것은?", o: ["비밀 보관용기에는 비밀이 보관되어 있다는 표시를 해야 한다.", "Ⅰ급 비밀은 반드시 이중 금고형 용기에 보관해야 한다.", "Ⅱ급·Ⅲ급 비밀은 이중 잠금장치 된 내화성 용기에 보관해야 한다.", "휴대할 수 있는 용기는 사용할 수 없다."], a: 0 },
+      { q: "사본 생산 시 올바르지 않은 것은?", o: ["배부처에 따라 사본 생산 및 사본번호를 부여한다.", "최초 생산 이후 추가 사본 생산 및 발송시 비밀이력카드와 발송용관리기록부에 그 근거를 기록한다.", "사본 생산 간 발생된 파지는 폐기 처리한다.", "접수한 사본을 재생산·배부 시 원본 생산부대의 승인은 불필요하다."], a: 3 },
+      { q: "보안SW가 설치된 KJCCS 단말기에 비밀자료를 저장하는 방법으로 올바른 것은?", o: ["비밀의 보관은 국가용 보안시스템이 적용되어 암호화되는 암호화 폴더(D:\\KJCCS암호화)에서만 가능하다.", "비밀 보관을 위한 임의의 폴더 생성시에는 절차에 따라 체계관리부서의 승인을 받아야 한다.", "보관용 암호화 폴더에 저장된 비밀자료는 합참은 비밀관리시스템, 그 외 부대는 비밀자료 목록표에 기록 후 관리하여야 한다.", "비밀자료를 타 체계(국방망)로 이동시 단말기 사용부서에 설치된 자료 이동용 PC를 통해 자료이동 하여야 한다."], a: 0 }
+    ],
+    tf: [
+      { q: "군사비밀은 그 내용이 누설되는 경우 국가 안전보장 및 국가 이익에 상당한 위험을 초래될 것으로 명백히 인정되는 가치를 지닌 것을 Ⅱ급 비밀로 한다.", a: "X" },
+      { q: "예고문 변경 비밀은 시행문과 비밀이력카드에 예고문 변경 승인 근거를 포함하여 예고문 변경 내용을 기록해야 한다.", a: "O" },
+      { q: "비밀은 최초 비밀지정권자가 결재한 때부터 비밀로 지정되며, 최종 결재권자의 결재 후 관리번호를 부여하고 접수용 비밀관리기록부에 등재하여 관리한다.", a: "O" },
+      { q: "훈련(연습) 기간에 생산된 비밀 원본은 훈련용 비밀관리기록부에 등재·활용해야 한다.", a: "O" },
+      { q: "악성코드 유입으로 피해가 발생한 장비들은 즉시 포맷하여 침해 확산을 차단해야 한다.", a: "X" },
+      { q: "비밀을 재분류 또는 예고문을 변경하였을 때에는 문서 또는 책자 표지의 구표시를 대각선 표시 및 여백에 재분류된 비밀등급 또는 변경된 예고문을 새로이 부여하며, 매면의 비밀등급도 일괄 변경해야 한다.", a: "X" },
+      { q: "인터넷 프린터는 외부망 접점을 차단하기 위해 단독으로 사용해야 한다.", a: "O" },
+      { q: "비밀자료를 정기적으로 보고(통보) 받거나 또는 현황 작성을 위하여 보고를 받는 부대에서 보고된 내용을 그대로 종합하는 경우 또는 주기적(일일, 주간 등)으로 비밀을 생산(보고)하는 부대는 해당 비밀자료의 사용 목적에 적합한 제목을 설정하여 비밀관리기록부에 등재 1건의 관리번호 부여한다.", a: "O" },
+      { q: "각급부대의 장은 무기·전력지원체계의 전자파에 대한 보호대책을 강구하여야 하며, 국군방첩사령관은 이에 대한 실태를 확인 및 점검할 수 있다.", a: "O" },
+      { q: "각급부대의 장은 컴퓨터 바이러스 감염 및 악성코드 유입으로 피해 발생 시 피해받은 장비들을 보존하여야 하며, 임의로 삭제하거나 포맷하여서는 아니 된다.", a: "O" }
+    ]
+  },
+
+  3: {
+    short: [
+      { q: "저장장치가 있는 디지털복합기 중 {_}이 내장된 제품을 선정하여야 하며, 자료 삭제 기능을 자동으로 고정해 운용하여야 한다.", a: ["자료 완전삭제 모듈"] },
+      { q: "{_}라도 대외에 임의로 공개할 수 없다.", a: ["일반문서"] },
+      { q: "국방보안업무훈령은 {_} 및 동법 시행령과 보안업무규정 시행규칙 제71조의 규정에 따라 국방보안업무의 시행에 필요한 사항을 규정함을 목적으로 한다.", a: ["군사기밀보호법"] },
+      { q: "{_}이란 아군의 군사작전 및 활동을 적이 정확히 예측할 수 없도록 아군의 작전 및 활동에 관한 사항을 보호하는 활동이다.", a: ["작전보안"] },
+      { q: "{_}은 소속 부대 및 기관장의 명을 받아 부대 및 기관의 전반적인 보안에 대한 조정·감독업무를 수행하는 자이다.", a: ["보안담당관"] },
+      { q: "각급부대의 장은 시설물의 중요도에 따라 다음 각 호와 같이 구분하여 필요한 보안대책을 강구하여야 한다. 다음 각호의 시설을 중요도에 따라 구분하시오.\n① {_}: 군사통제구역, 군사제한구역\n② {_}: 전투근무지원시설 등\n③ {_}: 편의시설, 면회실, 종교시설 등", a: ["군사보호구역", "지원시설구역", "일반시설구역"] },
+      { q: "비밀은 개인별·부서별로 존안할 수 없으며, 존안 전담부서가 설치된 부대에서 {_}만 존안할 수 있다. 이 경우 원본에 부여된 {_} 동안만 존안하여야 한다.", a: ["사본", "보존기간"] },
+      { q: "정보통신망을 이용하여 전문을 송·수신한 때에는 전문 송·수신기록부에 기록하고, {_}(Log File 자동출력)를 출력하여 보관하여야 한다.", a: ["통신관리기록지"] },
+      { q: "정보통신망을 관리·운용하는 부대의 장은 군 정보통신망별 종합된 주소체계(IP Address, 도메인 이름, 사용자 이름 등) 일람표는 {_}로 분류하고, 육군 사단급·해군 함대사급·공군 비행단급 이상 부대의 종합된 주소체계는 {_}로 분류한다.", a: ["비밀", ["3급", "Ⅲ급", "III급"]] },
+      { q: "비밀을 KJCCS 단말기 암호화 폴더에 저장할 때에는 작업중인 비밀과 보관 비밀로 구분하여 저장할 수 있다. 비밀 보관시 제목 앞에 해당 비밀의 {_}를 기록 및 관리한다.", a: ["관리번호"] }
+    ],
+    mc: [
+      { q: "다음 중 비밀회의자료 생산·관리와 관련 틀린 것은?", o: ["회의 참석자에게 배부하기 위한 비밀회의 자료는 사본번호를 부여하여야 하며, 회의 종료와 동시 회수하여 파기할 자료는 접수용 비밀관리기록부에 등재된 원본의 비밀이력카드에 사본부수(사본번호) 및 파기근거를 기록하여야 한다.", "종합하는 부서에 비밀 회의자료를 작업 중(초안)인 상태에서 제출할 때에는 비밀이력카드 및 발송용 비밀관리기록부에 근거를 기록하여야 한다.", "종합하는 부서에 비밀 회의자료를 제출할 때에는 사본을 생산하여 제출하여야 한다.", "종합하는 부서에 제출한 비밀 회의자료(초안)는 제공 후 문서 또는 파일을 파기하거나 소거하여야 한다."], a: 1 },
+      { q: "비밀의 재분류 및 예고문 변경에 대한 설명으로 틀린 것은?", o: ["비밀이 과도 또는 과소하게 분류되었다고 판단될 때에는 적절한 등급으로 재분류 할 수 있다.", "비밀 원본에 대한 재분류 및 예고문 변경 검토 결과를 비밀이력카드에 기록해야 한다.", "상급부대로부터 접수한 Ⅱ급·Ⅲ급 비밀은 생산부대의 승인을 받아 재분류 및 예고문 변경이 가능하다.", "대외기관으로부터 접수한 Ⅱ급·Ⅲ급 비밀은 비밀지정권을 가진 결재권자의 직권으로 재분류 및 예고문 변경이 가능하다."], a: 3 },
+      { q: "비밀의 예고문에 대한 설명으로 틀린 것은?", o: ["비밀의 보호기간은 보호되어야 할 필요가 있는 기간으로 부여하되, “재발행 시” 등과 같이 불확실하게 기재해서는 안된다.", "사본의 보호기간은 원본의 보호기간보다 길게 부여할 수 있다.", "보존기간이 시작되는 일자는 비밀 원본을 생산한 날이 속하는 해의 다음해 1월 1일로 한다.", "보존기간은 보호기간 보다 길게 부여해야 한다."], a: 2 },
+      { q: "비밀 바인더 활용 관련 괄호안에 포함할 내용은?\n\n[업무참고용으로 비밀을 복제·복사, 발췌하여 바인더를 작성(사본)할 경우에는 (  )의 승인을 받아 접수용 비밀관리기록부에 등재하고 바인더 첫 쪽에는 목록표를 유지하여야 하며, 바인더 내 복제·복사 비밀은 원본 비밀의 (  )이 만료될 경우 (  )한다.]", o: ["보안담당관, 보존기간, 파기", "보관책임관 ‘정’, 보호기간, 이관", "보관책임관 ‘정’, 보호기간, 파기", "관리책임관 ‘정’, 보존기간, 이관"], a: 2 },
+      { q: "비밀 대출·열람과 관련하여 올바른 것은?", o: ["Ⅱ·Ⅲ급 비밀 대출시 부서내 보안담당관의 승인이 필요하다.", "Ⅱ·Ⅲ급 비밀 열람시 비밀열람전에 관련사항을 기록·유지한다.", "합동보관소 보관 비밀을 반출·입시 통제구역출입대장 용무란에 반출·입 내용을 기록한다.", "Ⅱ·Ⅲ급 비밀 반납시 비밀대출부에 관련사항을 반드시 기록하여야 한다."], a: 2 }
+    ],
+    tf: [
+      { q: "CD의 비밀표시는 전면 중앙에 군 전용 스티커를 부착하고, 그 밖의 비밀자료(필름, 사진, 영상자료 등)에는 비밀표시를 생략할 수 있다.", a: "X" },
+      { q: "병사 면회객 중 외국 국적의 가족은 「부대관리 훈령」 면회규정을 적용한다.", a: "O" },
+      { q: "훈련(연습) 기간에 생산 및 접수된 비밀은 별도 접수용 비밀관리기록부를 작성·유지해야 한다.", a: "O" },
+      { q: "훈련(연습) 기간에 통제구역에서 접수한 비밀사본이 업무상 계속 필요한 경우에는 보안담당관 승인 후 훈련용 비밀관리기록부에 등재해야 한다.", a: "X" },
+      { q: "비밀은 공무상 이유라도 자가에 지출할 수 없다.", a: "O" },
+      { q: "각급부대장은 군사통제구역·제한구역은 비인가 녹음 및 촬영방지를 위한 보안대책을 강구하여야 한다.", a: "O" },
+      { q: "암호장비 운용책임관(정)의 1개월 미만 부재시에는 인계·인수를 하지 않아도 된다.", a: "O" },
+      { q: "부대 출입증이 발급되는 자는 별도의 비밀취급 인가증을 발급하지 않고 부대 출입증 뒷면에 표시하여 사용할 수 있다.", a: "O" },
+      { q: "각급부대의 장은 정보통신체계를 신규로 도입할 때 정보통신망 감사를 위한 기능이 제공되도록 하여야 한다.", a: "O" },
+      { q: "전장관리정보체계 네트워크 혼용 방지를 위해 체계간 LAN 케이블 색상을 아래와 같이 적용하고 주기표를 부착한다.", a: "X", table: true }
+    ]
+  },
+
+  4: {
+    short: [
+      { q: "각급부대의 장은 군사보안시설 및 보호장비의 효율적 관리를 위해 부대에 설치된 CCTV 녹화영상 자료는 {_} 이상 보관토록 한다.", a: ["30일"] },
+      { q: "{_}란, 비밀의 누설 또는 분실과 국가중요시설 및 장비의 파괴, 보호구역에 대한 불법침입 등을 말한다.", a: ["보안사고"] },
+      { q: "보안감사는 정기감사, 수시감사, {_}으로 구분하여 실시한다.", a: ["보안점검"] },
+      { q: "국방보안업무훈령은 군사기밀보호법 및 동법 시행령과 {_} 시행규칙 제71조의 규정에 따라 국방보안업무의 시행에 필요한 사항을 규정함을 목적으로 한다.", a: ["보안업무규정"] },
+      { q: "비밀을 생산할 경우 원본에는 {_}과 {_}, 사본에는 {_}과 {_}을 명시해야 한다.", a: ["보호기간", "보존기간", "보호기간", "처리방법"], any: true },
+      { q: "암호장비 관리책임관은 설치·운용하지 않는 암호장비를 {_}이나 {_}, 비밀보관소({_}) 등 보안대책({_})이 강구된 장소에 보관하여야 한다.", a: ["암호실", "비밀합동보관소", "암호실 미설치 부대", "경계대책, 시건 장치 등"] },
+      { q: "국가안전보장에 한정된 국가 기밀을 취급하는 인원의 충성심·신뢰성 등을 확인하기 위하여 {_}를 한다.", a: ["신원조사"] },
+      { q: "상용 FAX를 이용하여 자료 송신 시 {_}로 분류된 문서 및 자료에 한하며, 결재권자 또는 부서장의 {_}를 받은 후 해당문서(자료)의 우측 상단에 표시하여 송신하여야 한다.", a: ["공개", "보안성 검토"] },
+      { q: "휴대형 컴퓨터의 분실 및 도난 시에는 기록·유지 중인 휴대형 컴퓨터 {_}를 포함하여 보안담당관 및 지원 방첩부대에 신고하여야 한다.", a: ["저장자료 목록표"] },
+      { q: "전장망(KJCCS)에서 비밀자료를 타 체계(국방망)로 이동시 보안부서에 설치된 자료이동용 PC를 활용하며 {_}을 기록유지 한다.", a: ["자료이동 PC 사용대장"] }
+    ],
+    mc: [
+      { q: "다음 훈령 내용 중 틀린 것은?", o: ["비밀회의 시 군사보호구역으로 설정되지 않은 장소는 임시 보호구역(통제구역)으로 설정하여 이에 따른 보안대책을 강구하여야 한다.", "각급부대장이 공무 외 목적으로 대외 제공하는 자료는 차상급 부대장의 보안성 검토를 별도로 받아야 한다.", "업무상 비공개 업무자료를 부대에서 영외로 반출할 때는 소속부서 보안담당관의 승인을 받아야 한다.", "용역업체·공사 인원 등이 업무 목적상 출입 시에는 육안식별이 가능하도록 보안대책을 강구해야 한다."], a: 2 },
+      { q: "수정·부분대체·추가문의 처리절차로 틀린 것은?", o: ["수정·부분대체·추가문을 생산 및 접수한 부대에서는 결재 또는 접수 즉시 접수용 비밀관리기록부에 등재하여 관리번호를 부여한다.", "수정 시 수정대상 내용을 2개의 적선으로 삭선하고 수정내용을 기재한 후 생산부대는 생산한 수정문(원본)을 기존 원본에 합철하여 보관한다.", "부분대체 시 부분대체문(원본)으로 대체한 후 생산부대는 부분대체되어 나온 대체문을 파기한다.", "추가 시 생산·접수된 추가문 삽입한다."], a: 2 },
+      { q: "비밀의 재분류 및 예고문 변경에 대한 설명으로 틀린 것은?", o: ["비밀이 과도 또는 과소하게 분류되었다고 판단될 때에는 적절한 등급으로 재분류할 수 있다.", "비밀 원본에 대한 재분류 및 예고문 변경 검토 결과를 비밀이력카드에 기록해야 한다.", "하급부대로부터 접수한 Ⅱ급·Ⅲ급 비밀은 생산부대의 승인을 받아 재분류 및 예고문 변경이 가능하다.", "대외기관으로부터 접수한 Ⅱ급·Ⅲ급 비밀은 발행기관의 승인을 받아 재분류 및 예고문 변경이 가능하다."], a: 2 },
+      { q: "바이러스 감염이 발견되었을 때 필요한 조치가 아닌 것은?", o: ["바이러스 감염 피해를 최소화하기 위하여 감염된 시스템 네트워크 분리", "바이러스 감염현장(시스템)을 보존하고 침해사고 대응반 및 방첩부대에 신고", "바이러스 감염 확산 방지를 위해 부대 내 사용자에게도 관련 사실을 미전파", "바이러스 백신프로그램을 이용하여 정상 복구"], a: 2 },
+      { q: "보안SW가 설치된 KJCCS 단말기에 비밀자료를 저장하는 방법으로 올바른 것은?", o: ["비밀의 보관은 국가용 보안시스템이 적용되어 암호화되는 암호화 폴더(D:\\KJCCS암호화)에서만 가능하다.", "비밀 보관을 위한 임의의 폴더 생성시에는 절차에 따라 체계관리부서의 승인을 받아야 한다.", "보관용 암호화 폴더에 저장된 비밀자료는 합참은 비밀관리시스템, 그 외 부대는 비밀자료 목록표에 기록 후 관리하여야 한다.", "비밀자료를 타 체계(국방망)로 이동시 단말기 사용부서에 설치된 자료 이동용 PC를 통해 자료이동 하여야 한다."], a: 0 }
+    ],
+    tf: [
+      { q: "업무참고용으로 비밀을 복제·복사하여 비밀바인더를 작성할 경우에는 비밀지정권자의 승인을 받아 접수용 비밀관리기록부에 등재한다.", a: "X" },
+      { q: "비밀은 최초 보관책임관 “정”이 결재한 때부터 비밀로 지정되며, 최종 결재권자의 결재 후 관리번호를 부여하고 접수용 비밀관리기록부에 등재하여 관리한다.", a: "X" },
+      { q: "등기우편으로 비밀을 발송할 경우 이중봉투를 사용하고, 내외부 봉투에 비밀표시를 하여야 한다.", a: "X" },
+      { q: "비밀 부분 대체시 원본 생산부대는 부분 대체되어 나온 대체문을 파기하여야 한다.", a: "X" },
+      { q: "군 공사 참여 인원에게 공사에 필요한 비밀자료 지출·대출은 불가하다.", a: "X" },
+      { q: "군사제한구역은 개인소유 상용정보통신장비 반입이 가능하지만 사진 촬영과 녹음은 불가하다.", a: "O" },
+      { q: "암호장비 외부에는 장비 운용·관리를 위해 형식번호, 기관번호 및 일련번호를 표시해야 한다.", a: "X" },
+      { q: "보안담당관이 교체될 때에는 소관 업무에 대하여 인수인계서를 작성하여 부대장에게 보고하고 확인 서명을 받아야 한다.", a: "O" },
+      { q: "각급부대 및 기관의 장은 사물인터넷을 이용한 시스템을 구축·운용하고자 할 경우 외부망과 분리하여야 한다. 내부망은 필요시 연동 가능하다.", a: "X" },
+      { q: "각급부대의 장은 컴퓨터 바이러스 감염 및 악성코드 유입으로 피해 발생 시 피해받은 장비들을 보존하여야 하며, 임의로 삭제하거나 포맷하여서는 아니 된다.", a: "O" }
+    ]
+  }
+};
+
+const SECTIONS = [
+  { t: "short", name: "단답형", pts: 5 },
+  { t: "mc",    name: "선택형", pts: 4 },
+  { t: "tf",    name: "진위형", pts: 3 }
+];
+const CIRCLED = ["①", "②", "③", "④", "⑤", "⑥"];
+
+/* ================== 유틸 ================== */
+const app = document.getElementById("app");
+let cur = null;
+
+function el(tag, cls, text) {
+  const e = document.createElement(tag);
+  if (cls) e.className = cls;
+  if (text != null) e.textContent = text;
+  return e;
+}
+const norm = s => String(s == null ? "" : s).replace(/[\s,·.()'"‘’“”「」]/g, "").toLowerCase();
+const alts = a => Array.isArray(a) ? a : [a];
+const dispAns = a => alts(a)[0];
+const secOf = t => SECTIONS.find(s => s.t === t);
+
+function mount(node) {
+  app.replaceChildren(node);
+  window.scrollTo(0, 0);
+}
+
+/* ================== 안 선택 화면 ================== */
+function renderHome() {
+  cur = null;
+  const w = el("div", "wrap");
+  w.append(el("h1", "home-title", "보안규정 평가 문제지"));
+  w.append(el("p", "home-sub", "풀어볼 안을 선택하세요."));
+  const grid = el("div", "set-grid");
+  Object.keys(SETS).forEach(n => {
+    const b = el("button", "set-btn");
+    b.append(el("span", "num", n + "안"));
+    b.append(el("span", "meta", "단답형 10문제\n선택형 5문제\n진위형 10문제"));
+    b.lastChild.style.whiteSpace = "pre-line";
+    b.addEventListener("click", () => startQuiz(+n));
+    grid.append(b);
+  });
+  w.append(grid);
+  mount(w);
+}
+
+/* ================== 퀴즈 ================== */
+function startQuiz(n, only) {
+  const S = SETS[n];
+  const items = [];
+  SECTIONS.forEach(sec => S[sec.t].forEach((_, i) => {
+    if (!only || only.has(sec.t + i)) items.push({ t: sec.t, i });
+  }));
+  cur = { n, items, ans: { short: {}, mc: {}, tf: {} }, retry: !!only };
+  renderQuiz();
+}
+
+function isAnswered(it) {
+  const v = cur.ans[it.t][it.i];
+  if (it.t === "short") return Array.isArray(v) && v.some(x => x && x.trim());
+  return v !== undefined;
+}
+function updateProgress() {
+  const done = cur.items.filter(isAnswered).length;
+  const total = cur.items.length;
+  const p = document.getElementById("prog");
+  const b = document.getElementById("barfill");
+  if (p) p.textContent = done + " / " + total;
+  if (b) b.style.width = (done / total * 100) + "%";
+}
+
+function qNo(i) { return el("div", "qno", (i + 1) + "."); }
+
+function buildShort(i) {
+  const q = SETS[cur.n].short[i];
+  const card = el("article", "card");
+  card.append(qNo(i));
+  const body = el("div", "qtext");
+  const parts = q.q.split("{_}");
+  const multi = parts.length > 2;
+  const inputs = [];
+  parts.forEach((p, k) => {
+    body.append(document.createTextNode(p));
+    if (k < parts.length - 1) {
+      const inp = el("input", "blank");
+      inp.type = "text";
+      inp.autocomplete = "off";
+      inp.autocapitalize = "off";
+      inp.spellcheck = false;
+      inp.placeholder = multi ? CIRCLED[k] : "정답";
+      inp.setAttribute("aria-label", i + 1 + "번 빈칸 " + (k + 1));
+      inp.addEventListener("input", () => {
+        const arr = cur.ans.short[i] || (cur.ans.short[i] = []);
+        arr[k] = inp.value;
+        updateProgress();
+      });
+      inp.addEventListener("keydown", e => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          const all = [...document.querySelectorAll(".blank")];
+          const nx = all[all.indexOf(inp) + 1];
+          if (nx) nx.focus(); else inp.blur();
+        }
+      });
+      inputs.push(inp);
+      body.append(inp);
+    }
+  });
+  card.append(body);
+  return card;
+}
+
+function buildMc(i) {
+  const q = SETS[cur.n].mc[i];
+  const card = el("article", "card");
+  card.append(qNo(i));
+  card.append(el("div", "qtext", q.q));
+  const box = el("div", "opts");
+  q.o.forEach((txt, k) => {
+    const b = el("button", "opt");
+    b.type = "button";
+    b.setAttribute("aria-pressed", "false");
+    b.append(el("span", "", CIRCLED[k]), el("span", "", txt));
+    b.addEventListener("click", () => {
+      cur.ans.mc[i] = k;
+      [...box.children].forEach((c, j) => c.setAttribute("aria-pressed", j === k ? "true" : "false"));
+      updateProgress();
+    });
+    box.append(b);
+  });
+  card.append(box);
+  return card;
+}
+
+function lanTable() {
+  const t = el("table", "mini");
+  const rows = [["구 분", "KJCCS", "AKJCCS", "JFOS-K"], ["색 상", "청색", "검정색", "보라색"]];
+  rows.forEach((r, ri) => {
+    const tr = el("tr");
+    r.forEach(c => tr.append(el(ri === 0 ? "th" : "td", "", c)));
+    t.append(tr);
+  });
+  return t;
+}
+
+function buildTf(i) {
+  const q = SETS[cur.n].tf[i];
+  const card = el("article", "card");
+  card.append(qNo(i));
+  const body = el("div", "qtext", q.q);
+  if (q.table) body.append(lanTable());
+  card.append(body);
+  const row = el("div", "tf");
+  ["O", "X"].forEach(v => {
+    const b = el("button", "", v);
+    b.type = "button";
+    b.setAttribute("aria-pressed", "false");
+    b.setAttribute("aria-label", v === "O" ? "맞다 (O)" : "틀리다 (X)");
+    b.addEventListener("click", () => {
+      cur.ans.tf[i] = v;
+      [...row.children].forEach(c => c.setAttribute("aria-pressed", c.textContent === v ? "true" : "false"));
+      updateProgress();
+    });
+    row.append(b);
+  });
+  card.append(row);
+  return card;
+}
+
+function renderQuiz() {
+  const frag = el("div");
+
+  const top = el("div", "topbar");
+  const inn = el("div", "topbar-in");
+  const back = el("button", "back", "안 선택");
+  back.addEventListener("click", () => {
+    if (cur.items.some(isAnswered) && !confirm("풀던 내용이 사라집니다. 안 선택 화면으로 갈까요?")) return;
+    renderHome();
+  });
+  const title = el("span", "top-title", cur.n + "안" + (cur.retry ? " 틀린 문제 다시 풀기" : ""));
+  const prog = el("span", "top-prog"); prog.id = "prog";
+  inn.append(back, title, prog);
+  const bar = el("div", "bar"); const fill = el("i"); fill.id = "barfill"; bar.append(fill);
+  top.append(inn, bar);
+  frag.append(top);
+
+  const w = el("div", "wrap");
+  SECTIONS.forEach(sec => {
+    const list = cur.items.filter(it => it.t === sec.t);
+    if (!list.length) return;
+    const head = el("div", "sec-head");
+    head.append(el("h2", "", sec.name), el("span", "", list.length + "문제 · 항목당 " + sec.pts + "점"));
+    w.append(head);
+    list.forEach(it => {
+      w.append(it.t === "short" ? buildShort(it.i) : it.t === "mc" ? buildMc(it.i) : buildTf(it.i));
+    });
+  });
+  frag.append(w);
+
+  const sb = el("div", "submit-bar");
+  const inner = el("div");
+  const btn = el("button", "primary", "제출하고 채점하기");
+  btn.addEventListener("click", submit);
+  inner.append(btn); sb.append(inner);
+  frag.append(sb);
+
+  mount(frag);
+  updateProgress();
+}
+
+/* ================== 채점 ================== */
+function gradeShort(q, userArr) {
+  const user = q.a.map((_, k) => (userArr && userArr[k]) || "");
+  let blankOk, ok;
+  if (q.any) {
+    const used = new Set();
+    blankOk = user.map(u => {
+      const k = q.a.findIndex((a, j) => !used.has(j) && alts(a).some(x => norm(x) === norm(u)));
+      if (k < 0) return false;
+      used.add(k); return true;
+    });
+    ok = blankOk.every(Boolean);
+  } else {
+    blankOk = q.a.map((a, k) => alts(a).some(x => norm(x) === norm(user[k])));
+    ok = blankOk.every(Boolean);
+  }
+  return { ok, user, blankOk };
+}
+
+function grade(it) {
+  const S = SETS[cur.n];
+  const q = S[it.t][it.i];
+  const v = cur.ans[it.t][it.i];
+  if (it.t === "short") return { q, ...gradeShort(q, v) };
+  if (it.t === "mc") return { q, ok: v === q.a, mine: v };
+  return { q, ok: v === q.a, mine: v };
+}
+
+function submit() {
+  const un = cur.items.filter(it => !isAnswered(it)).length;
+  if (un > 0 && !confirm("아직 답하지 않은 문제가 " + un + "개 있습니다. 그래도 제출할까요?")) return;
+  renderResult("wrong");
+}
+
+/* ================== 결과 ================== */
+function renderResult(filter) {
+  const results = cur.items.map(it => ({ ...it, ...grade(it) }));
+  const per = {};
+  SECTIONS.forEach(s => per[s.t] = { got: 0, max: 0, n: 0, right: 0 });
+  results.forEach(r => {
+    const s = secOf(r.t);
+    per[r.t].max += s.pts; per[r.t].n++;
+    if (r.ok) { per[r.t].got += s.pts; per[r.t].right++; }
+  });
+  const got = SECTIONS.reduce((a, s) => a + per[s.t].got, 0);
+  const max = SECTIONS.reduce((a, s) => a + per[s.t].max, 0);
+  const wrong = results.filter(r => !r.ok);
+
+  const w = el("div", "wrap");
+
+  const topRow = el("div");
+  const back = el("button", "back", "안 선택");
+  back.addEventListener("click", renderHome);
+  topRow.append(back);
+  w.append(topRow);
+
+  const box = el("section", "score-box");
+  const main = el("div", "score-main");
+  main.append(el("b", "", String(got)), el("span", "", "/ " + max + "점"));
+  box.append(el("div", "score-line", cur.n + "안" + (cur.retry ? " 틀린 문제 다시 풀기 결과" : " 채점 결과")));
+  box.append(main);
+  box.append(el("div", "score-line", wrong.length === 0 ? "모두 맞혔습니다." : "틀린 문제 " + wrong.length + "개 / 전체 " + results.length + "개"));
+  const parts = el("div", "score-parts");
+  SECTIONS.forEach(s => {
+    if (!per[s.t].n) return;
+    const d = el("div");
+    d.append(document.createTextNode(s.name));
+    d.append(el("b", "", per[s.t].got + " / " + per[s.t].max + "점"));
+    parts.append(d);
+  });
+  box.append(parts);
+
+  const act = el("div", "actions");
+  if (wrong.length) {
+    const rb = el("button", "primary", "틀린 문제만 다시 풀기");
+    rb.addEventListener("click", () => startQuiz(cur.n, new Set(wrong.map(r => r.t + r.i))));
+    act.append(rb);
+  }
+  const again = el("button", "ghost", "처음부터 다시");
+  again.addEventListener("click", () => startQuiz(cur.n));
+  act.append(again);
+  box.append(act);
+  w.append(box);
+
+  const tabs = el("div", "tabs");
+  const tW = el("button", "tab", "틀린 문제 " + wrong.length);
+  const tA = el("button", "tab", "전체 " + results.length);
+  tW.setAttribute("aria-pressed", filter === "wrong");
+  tA.setAttribute("aria-pressed", filter === "all");
+  tW.addEventListener("click", () => { renderResult("wrong"); });
+  tA.addEventListener("click", () => { renderResult("all"); });
+  tabs.append(tW, tA);
+  w.append(tabs);
+
+  const shown = filter === "wrong" ? wrong : results;
+  if (!shown.length) {
+    w.append(el("div", "empty", "틀린 문제가 없습니다."));
+  }
+  shown.forEach(r => w.append(buildReview(r)));
+
+  mount(w);
+}
+
+function ansRow(kind, label, text) {
+  const r = el("div", "ans-row " + kind);
+  r.append(el("span", "lab", label), el("span", "", text));
+  return r;
+}
+
+function buildReview(r) {
+  const sec = secOf(r.t);
+  const card = el("article", "card rv " + (r.ok ? "ok" : "no"));
+  const head = el("div", "rv-head");
+  head.append(el("span", "", sec.name + " " + (r.i + 1) + "번"));
+  head.append(el("span", "badge " + (r.ok ? "ok" : "no"), r.ok ? "정답" : "오답"));
+  card.append(head);
+
+  const grid = el("div", "ans-grid");
+
+  if (r.t === "short") {
+    const stem = r.q.q.replace(/\{_\}/g, "(    )");
+    card.append(el("div", "rv-q", stem));
+    if (r.q.any) {
+      grid.append(ansRow("mine" + (r.ok ? " right" : ""), "내 답안", r.user.map(u => u.trim() || "(미응답)").join(",  ")));
+      grid.append(ansRow("right-answer", "정답", r.q.a.map(dispAns).join(",  ") + "  (순서 무관)"));
+    } else {
+      r.q.a.forEach((a, k) => {
+        const tag = r.q.a.length > 1 ? CIRCLED[k] + " " : "";
+        const mine = r.user[k].trim() || "(미응답)";
+        if (r.blankOk[k]) {
+          grid.append(ansRow("mine right", "내 답안", tag + mine));
+        } else {
+          grid.append(ansRow("mine", "내 답안", tag + mine));
+          grid.append(ansRow("right-answer", "정답", tag + dispAns(a)));
+        }
+      });
+    }
+  } else if (r.t === "mc") {
+    card.append(el("div", "rv-q", r.q.q));
+    const mineTxt = r.mine === undefined ? "(미응답)" : CIRCLED[r.mine] + " " + r.q.o[r.mine];
+    grid.append(ansRow("mine" + (r.ok ? " right" : ""), "내 답안", mineTxt));
+    if (!r.ok) grid.append(ansRow("right-answer", "정답", CIRCLED[r.q.a] + " " + r.q.o[r.q.a]));
+  } else {
+    const qq = el("div", "rv-q", r.q.q);
+    if (r.q.table) qq.append(lanTable());
+    card.append(qq);
+    grid.append(ansRow("mine" + (r.ok ? " right" : ""), "내 답안", r.mine === undefined ? "(미응답)" : r.mine));
+    if (!r.ok) grid.append(ansRow("right-answer", "정답", r.q.a));
+  }
+  card.append(grid);
+  return card;
+}
+
+renderHome();
+</script>
+</body>
+</html>
