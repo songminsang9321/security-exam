@@ -333,6 +333,29 @@ const SETS = {
   }
 };
 
+
+function cloneQuestion(q) { return JSON.parse(JSON.stringify(q)); }
+function pickQuestions(type, picks, prefix) {
+  return picks.map(([setNo, index]) => {
+    const q = cloneQuestion(SETS[setNo][type][index]);
+    if (type === "short") q.q = prefix + q.q;
+    if (type === "tf") q.q = "다음 설명의 옳고 그름을 판단하시오.\n" + q.q;
+    if (type === "mc") {
+      q.q = q.q.replace("다음 중", "아래 보기 가운데").replace("설명으로 틀린 것은?", "설명 중 옳지 않은 것은?").replace("관련 틀린 것은?", "관련 내용 중 옳지 않은 것은?");
+      const oldOptions = q.o.slice();
+      const order = [2, 0, 3, 1].slice(0, oldOptions.length);
+      q.o = order.map(i => oldOptions[i]);
+      q.a = order.indexOf(q.a);
+    }
+    return q;
+  });
+}
+SETS[5] = {
+  short: pickQuestions("short", [[2,0],[3,2],[4,1],[1,4],[2,3],[3,4],[4,6],[1,7],[2,8],[4,9]], "보안규정에 따라 다음 문장의 빈칸을 완성하시오.\n"),
+  mc: pickQuestions("mc", [[1,0],[2,3],[3,1],[4,3],[1,4]], ""),
+  tf: pickQuestions("tf", [[2,4],[1,5],[3,6],[4,5],[2,9],[1,6],[3,8],[4,7],[2,1],[4,9]], "")
+};
+
 const SECTIONS = [
   { t: "short", name: "단답형", pts: 5 },
   { t: "mc",    name: "선택형", pts: 4 },
@@ -364,8 +387,8 @@ function mount(node) {
 function renderHome() {
   cur = null;
   const w = el("div", "wrap");
-  w.append(el("h1", "home-title", "보안규정 평가 문제지 · 별도판"));
-  w.append(el("p", "home-sub", "개인 연습용 별도 버전입니다. 평가할 문제 세트를 선택하세요."));
+  w.append(el("h1", "home-title", "보안규정 평가 문제지 · 개정 별도판"));
+  w.append(el("p", "home-sub", "문항 구성·순서·선택지를 변경한 별도 연습 버전입니다. 평가할 문제 세트를 선택하세요."));
   const grid = el("div", "set-grid");
   Object.keys(SETS).forEach(n => {
     const b = el("button", "set-btn");
